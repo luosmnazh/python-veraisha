@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% include 'snippets/get_navbar.html' %}
+
+    <div class="container my-5 pt-2">
+        <div class="container my-5">
+            <a href="{% url 'cars:car_maintenance' car.id %}" class="btn btn-primary">Back</a>
+        </div>
+        <h2 class="my-5">Add Maintenance</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="maintenance_date">Maintenance Date</label>
+                <input type="date" class="form-control" id="maintenance_date" name="maintenance_date">
+            </div>
+            <div class="form-group">
+                <label for="maintenance_cost">Maintenance Cost</label>
+                <input type="number" class="form-control" id="maintenance_cost" name="maintenance_cost">
+            </div>
+            <div class="form-group">
+                <label for="maintenance_description">Maintenance Description</label>
+                <textarea class="form-control" id="maintenance_description" name="maintenance_description"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+{% endblock %}

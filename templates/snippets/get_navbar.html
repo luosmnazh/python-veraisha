@@ -1,10 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% if user.is_manager %}
+    {% include 'snippets/manager_navbar.html' %}
+{% else %}
+    {% include 'snippets/user_navbar.html' %}
+{% endif %}

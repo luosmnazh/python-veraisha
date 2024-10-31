@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% include 'snippets/get_navbar.html' %}
+
+    <div class="container my-5 pt-2">
+        <div class="container my-5">
+            <a href="{% url 'cars:car_list_manager' car.model.id %}" class="btn btn-primary">Back</a>
+        </div>
+        <h2 class="my-5">Car Maintenance</h2>
+        <div class="row">
+            <div class="col-md-6">
+                <a href="{% url 'cars:maintenance_add' car.id %}" class="btn btn-primary">Add Maintenance</a>
+            </div>
+        </div>
+        <hr>
+        <h3>Car: {{ car.license_plate }}</h3>
+        <div class="card">
+            <div class="card-header">
+                <h4 class="m-0">Maintenance History</h4>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Maintenance Date</th>
+                        <th>Maintenance Cost</th>
+                        <th>Maintenance Description</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for maintenance in maintenances %}
+                        <tr>
+                            <td>{{ maintenance.maintenance_date }}</td>
+                            <td>{{ maintenance.maintenance_cost }}</td>
+                            <td>{{ maintenance.maintenance_description }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

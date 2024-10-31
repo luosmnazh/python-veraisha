@@ -41,8 +41,8 @@
                         <div class="card-footer mt-auto d-flex justify-content-between">
 
                             {% if user.is_staff %}
-                                <a href="{% url 'cars:edit_car' car_model.id %}"
-                                   class="btn btn-outline-secondary">Edit</a>
+                                <a href="{% url 'cars:car_list_manager' car_model.id %}"
+                                   class="btn btn-outline-secondary">View cars</a>
                             {% else %}
                                 <a href="{% url 'rent_car_random' car.car_model.id %}" class="btn btn-primary">Rent
                                     Now</a>

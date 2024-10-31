@@ -1,10 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+    {% include 'snippets/get_navbar.html' %}
+
+    <div class="container my-5">
+        <h2 class="my-5">Cars by Model</h2>
+        {% if cars_by_model %}
+            <div class="row car-item mb-3 border rounded-3 p-2">
+                <div class="col-md-1 d-flex align-items-center">
+                    <p class="m-0"><strong>License Plate</strong></p>
+                </div>
+                <div class="col-md-1 d-flex align-items-center">
+                    <p class="m-0"><strong>Daily Price</strong></p>
+                </div>
+                <div class="col-md-1 d-flex align-items-center">
+                    <p class="m-0"><strong>Mileage</strong></p>
+                </div>
+                <div class="col-md-1 d-flex align-items-center">
+                    <p class="m-0"><strong>Status</strong></p>
+                </div>
+                <div class="col-md-1 d-flex align-items-center">
+                    <p class="m-0"><strong>Location</strong></p>
+                </div>
+                <div class="col-md-6 d-flex align-items-center">
+                    <p class="m-0"><strong>Description</strong></p>
+                </div>
+                <div class="col-md-1 d-flex align-items-center">
+                    <p class="m-0"><strong>Actions</strong></p>
+                </div>
+            </div>
+        {% endif %}
+        {% for car in cars_by_model %}
+            <div class="row car-item mb-3 border rounded-3 p-2">
+                <div class="col-md-1 d-flex align-items-center">
+                    <p class="m-0">{{ car.license_plate }}</p>
+                </div>
+                <div class="col-md-1 d-flex align-items-center">
+                    <p class="m-0">{{ car.daily_price }}</p>
+                </div>
+                <div class="col-md-1 d-flex align-items-center">
+                    <p class="m-0">{{ car.mileage }}</p>
+                </div>
+                <div class="col-md-1 d-flex align-items-center">
+                    <p class="m-0">{{ car.status|capfirst }}</p>
+                </div>
+                <div class="col-md-1 d-flex align-items-center">
+                    <p class="m-0">{{ car.location }}</p>
+                </div>
+                <div class="col-md-4 d-flex align-items-center">
+                    <p class="m-0">{{ car.description }}</p>
+                </div>
+                <div class="col-md-3 d-flex align-items-center">
+                    <div class="row">
+                        <div class="col-md-2 mx-2">
+                            <a href="{% url 'cars:car_update' car.id %}" class="btn btn-primary">Edit</a>
+                        </div>
+                        <div class="col-md-4 mx-2">
+                            <a href="{% url 'cars:car_maintenance' car.id %}" class="btn btn-primary">Maintenance</a>
+                        </div>
+                        <div class="col-md-4 mx-2">
+                            <a href="{% url 'cars:car_delete' car.id %}" class="btn btn-danger" onclick="return confirmDelete()">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block scripts %}
+{#    Are you sure#}
+    <script>
+        function confirmDelete() {
+            return confirm('Are you sure you want to delete this car?');
+        }
+
+
+    </script>
+{% endblock %}

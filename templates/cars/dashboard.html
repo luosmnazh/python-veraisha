@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% include 'snippets/get_navbar.html' %}
+
+    <div class="container my-5">
+        <h2 class="mb-4">Dashboard</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Cars in Rent</h5>
+                        <p class="card-text">{{ cars_in_rent }}</p>
+                        <a href="{% url 'cars:car_models' %}?status=rented" class="btn btn-primary">Show</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Cars in Service</h5>
+                        <p class="card-text">{{ cars_in_service }}</p>
+                        <a href="{% url 'cars:car_models' %}?status=in_service" class="btn btn-primary">Show</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Cars</h5>
+                        <p class="card-text">{{ total_cars }}</p>
+                        <a href="{% url 'cars:car_models' %}" class="btn btn-primary">Show</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Car Models</h5>
+                        <p class="card-text">{{ total_car_models }}</p>
+                        <a href="{% url 'cars:car_models' %}" class="btn btn-primary">Show Models</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Maintenance</h5>
+                        <p class="card-text">{{ total_maintenance }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Users</h5>
+                        <p class="card-text">{{ total_users }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Maintenance Cost</h5>
+                        <p class="card-text">{{ total_maintenance_cost }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Total Rental Income</h5>
+                        <p class="card-text">{{ total_rental_income }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
