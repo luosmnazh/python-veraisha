@@ -14,9 +14,9 @@ from users.models import User
 
 class LoginView(UnauthenticatedOnlyMixin, View):
     form_class = UserLoginForm
-    success_url = 'car:home'
+    success_url = 'cars:index'
     bad_url = 'users:login'
-    authenticated_next_page = 'car:home'
+    authenticated_next_page = 'cars:index'
 
     def get(self, request):
         return render(request, 'users/login.html')
@@ -38,7 +38,7 @@ class LoginView(UnauthenticatedOnlyMixin, View):
 
 
 class LogoutView(LoginRequiredMixin, View):
-    next_page = 'car:home'
+    next_page = 'cars:index'
 
     def get(self, request):
         logout(request)
@@ -51,8 +51,8 @@ class LogoutView(LoginRequiredMixin, View):
 
 class RegisterView(UnauthenticatedOnlyMixin, View):
     form_class = UserRegistrationForm
-    next_page = 'car:home'
-    authenticated_next_page = 'car:home'
+    next_page = 'cars:index'
+    authenticated_next_page = 'cars:index'
 
     def get(self, request):
         return render(request, 'users/register.html')

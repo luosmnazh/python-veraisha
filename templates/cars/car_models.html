@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+{% block content %}
+    {% include 'snippets/get_navbar.html' %}
+
+    <div class="container my-5 pt-5">
+        <h2 class="mb-4">Available Cars</h2>
+        {% if user.is_manager %}
+            <a href="{% url 'cars:create_car' %}" class="btn btn-primary mb-3">Add New Car</a>
+        {% endif %}
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for car_model in car_models %}
+                <div class="col">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-img-top" style="height: 200px; overflow: hidden;">
+                            {% if car_model.default_image %}
+                                <img src="{{ car_model.default_image.url }}" class="img-fluid"
+                                     alt="{{ car_model }}">
+                            {% else %}
+                                <div class="d-flex align-items-center justify-content-center h-100 bg-secondary text-white">
+                                    <span>No Image</span>
+                                </div>
+                            {% endif %}
+                        </div>
+
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">{{ car_model.brand }} {{ car_model.model }}</h5>
+                            <p class="card-text"
+                               style="height: 60px; overflow: hidden;">{{ car_model.description|truncatewords:15 }}</p>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><strong>Transmission:</strong> {{ car_model.transmission|capfirst }}</li>
+                                <li class="list-group-item"><strong>Price Per
+                                    Day:</strong> {{ car_model.get_min_max_price_per_model|format_price_range }}</li>
+                                <li class="list-group-item"><strong>Year:</strong> {{ car_model.year }}</li>
+                                <li class="list-group-item"><strong>Available:</strong> {{ car_model.get_availability }}
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="card-footer mt-auto d-flex justify-content-between">
+
+                            {% if user.is_staff %}
+                                <a href="{% url 'cars:edit_car' car_model.id %}"
+                                   class="btn btn-outline-secondary">Edit</a>
+                            {% else %}
+                                <a href="{% url 'rent_car_random' car.car_model.id %}" class="btn btn-primary">Rent
+                                    Now</a>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

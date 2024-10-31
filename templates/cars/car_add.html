@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% include 'snippets/get_navbar.html' %}
+    <div class="container mt-5 pt-5">
+
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-5">
+                    <h2 class="">Add New Car</h2>
+
+                    <!-- License plate -->
+                    <div class="mb-3">
+                        <label for="license_plate" class="form-label">License Plate</label>
+                        <input type="text" class="form-control" id="license_plate" name="license_plate" maxlength="10"
+                               required>
+                    </div>
+
+                    <!-- Model pickup -->
+                    <div class="mb-3">
+                        <label for="model" class="form-label">Car Model</label>
+                        <select name="model" id="model" class="form-select">
+                            <option value="">Create new model</option>
+                            {% for car_model in form.model.field.queryset %}
+                                <option value="{{ car_model.id }}">{{ car_model.brand }} {{ car_model.model }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <!-- Daily cost -->
+                    <div class="mb-3">
+                        <label for="daily_price" class="form-label">Daily Price</label>
+                        <input type="number" class="form-control" id="daily_price" name="daily_price" step="0.01"
+                               required>
+                    </div>
+
+                    <!-- Mileage -->
+                    <div class="mb-3">
+                        <label for="mileage" class="form-label">Mileage</label>
+                        <input type="number" class="form-control" id="mileage" name="mileage" value="0" required>
+                    </div>
+
+                    <!-- Status -->
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select class="form-select" id="status" name="status">
+                            <option value="available" selected>Available</option>
+                            <option value="rented">Rented</option>
+                            <option value="maintenance">Maintenance</option>
+                        </select>
+                    </div>
+
+                    <!-- Location -->
+                    <div class="mb-3">
+                        <label for="location" class="form-label">Location</label>
+                        <input type="text" class="form-control" id="location" name="location" value="0.0,0.0" required>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="mb-3">
+                        <label for="display_description" class="form-label">Description (internal use)</label>
+                        <textarea class="form-control" id="display_description" name="display_description" rows="11"
+                                  required></textarea>
+                    </div>
+
+                </div>
+                <div class="col-md-6 offset-md-1" id="car_model_form">
+
+                    <div class="col-md-6">
+                        <h5>Car Model Information</h5>
+                        <p class="text-muted">Choose model from the list or create new one:</p>
+
+                        <div class="mb-3">
+                            <label for="brand" class="form-label">Brand</label>
+                            <input type="text" name="brand" id="brand" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="model" class="form-label">Model</label>
+                            <input type="text" name="model1" id="model" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="year" class="form-label">Year</label>
+                            <input type="number" class="form-control" id="year" name="year" required>
+                        </div>
+
+                        <!-- Body type -->
+                        <div class="mb-3">
+                            <label for="body_type" class="form-label">Body Type</label>
+                            <select name="body_type" id="body_type" class="form-select" required>
+                                {% for choice, label in form.body_type.field.choices %}
+                                    <option value="{{ choice }}">{{ label }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <!-- Fuel type -->
+                        <div class="mb-3">
+                            <label for="fuel_type" class="form-label">Fuel Type</label>
+                            <select class="form-select" id="fuel_type" name="fuel_type" required>
+                                {% for choice, label in form.fuel_type.field.choices %}
+                                    <option value="{{ choice }}">{{ label }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <!-- Transmission -->
+                        <div class="mb-3">
+                            <label for="transmission" class="form-label">Transmission</label>
+                            <select class="form-select" id="transmission" name="transmission" required>
+                                <option value="" selected>Choose...</option>
+                                <option value="manual">Manual</option>
+                                <option value="automatic">Automatic</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="default_image" class="form-label">Default Image</label>
+                            <input type="file" name="default_image" id="default_image" class="form-control"
+                                   accept="image/*">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea name="description" id="description" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Create Car</button>
+        </form>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        const modelSelect = $('#model');
+        const carModelForm = $('#car_model_form');
+
+        modelSelect.on('change', function () {
+            changeInputsRequired();
+            if (modelSelect.val() === '') {
+                carModelForm.show();
+            } else {
+                carModelForm.hide();
+            }
+        });
+        function changeInputsRequired() {
+            const isRequired = modelSelect.val() === '';
+            const inputs = [$('#brand'), $('#model'), $('#year'), $('#body_type'), $('#fuel_type'), $('#transmission'), $('#description')];
+
+            inputs.forEach(input => input.attr('required', isRequired));
+        }
+    </script>
+{% endblock %}

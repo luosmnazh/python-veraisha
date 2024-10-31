@@ -20,6 +20,10 @@ class User(AbstractUser):
 
         self.username = self.email.split('@')[0]  # username is email without domain
 
+    @property
+    def is_manager(self):
+        return self.groups.filter(name='Car manager').exists()
+
 
 class DriverLicense(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='driver_license', primary_key=True)
