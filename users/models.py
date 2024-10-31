@@ -11,9 +11,14 @@ class User(AbstractUser):
         return self.username
 
     def save(self, *args, **kwargs):
+        self._before_save()
         super(User, self).save(*args, **kwargs)
+
+    def _before_save(self):
         if self.is_driver:
             self.driver_license = None
+
+        self.username = self.email.split('@')[0]  # username is email without domain
 
 
 class DriverLicense(models.Model):
