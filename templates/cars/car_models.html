@@ -44,7 +44,7 @@
                                 <a href="{% url 'cars:car_list_manager' car_model.id %}"
                                    class="btn btn-outline-secondary">View cars</a>
                             {% else %}
-                                <a href="{% url 'rent_car_random' car.car_model.id %}" class="btn btn-primary">Rent
+                                <a href="{% url 'rent:rental_create' car_model.id %}" class="btn btn-primary">Rent
                                     Now</a>
                             {% endif %}
 

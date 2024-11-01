@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% include 'snippets/get_navbar.html' %}
+<div class="container mt-5">
+    <h2>Детали аренды</h2>
+    <p><strong>Автомобиль:</strong> {{ object.car }}</p>
+    <p><strong>Пользователь:</strong> {{ object.user }}</p>
+    <p><strong>Дата начала:</strong> {{ object.start_date }}</p>
+    <p><strong>Дата окончания:</strong> {{ object.end_date }}</p>
+    <p><strong>Статус:</strong> {{ object.status }}</p>
+    <p><strong>Цена:</strong> {{ object.total_price }}</p>
+    <p><strong>Заметки:</strong> {{ object.notes }}</p>
+
+    <a href="{% url 'rent:rental_cancel' object.pk %}" class="btn btn-danger">Отменить аренду</a>
+    <a href="{% url 'rent:rental_finish' object.pk %}" class="btn btn-success">Завершить аренду</a>
+</div>
+{% endblock %}

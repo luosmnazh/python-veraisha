@@ -88,7 +88,7 @@
                         <div class="mb-3">
                             <label for="body_type" class="form-label">Body Type</label>
                             <select name="body_type" id="body_type" class="form-select" required>
-                                {% for choice, label in form.body_type.field.choices %}
+                                {% for choice, label in car_model_form.body_type.field.choices %}
                                     <option value="{{ choice }}">{{ label }}</option>
                                 {% endfor %}
                             </select>
@@ -98,7 +98,7 @@
                         <div class="mb-3">
                             <label for="fuel_type" class="form-label">Fuel Type</label>
                             <select class="form-select" id="fuel_type" name="fuel_type" required>
-                                {% for choice, label in form.fuel_type.field.choices %}
+                                {% for choice, label in car_model_form.fuel_type.field.choices %}
                                     <option value="{{ choice }}">{{ label }}</option>
                                 {% endfor %}
                             </select>
