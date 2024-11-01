@@ -52,7 +52,7 @@ def filter_cars(request):
 class CarCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Car
     form_class = CarCreateForm
-    success_url = reverse_lazy('cars:cars')
+    success_url = reverse_lazy('cars:car_models')
     permission_required = 'cars.add_car'
     template_name = 'cars/car_add.html'
     login_url = reverse_lazy('users:login')
