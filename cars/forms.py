@@ -40,6 +40,7 @@ class CarModelForm(forms.ModelForm):
         instance = super().save(commit=False)
         instance.model = self.cleaned_data['model1']
         instance.description = self.cleaned_data['description1']
+        instance.default_image.name = f'{instance.brand} {instance.model}.{instance.default_image.name.split(".")[-1]}'
         if commit:
             instance.save()
         return instance
