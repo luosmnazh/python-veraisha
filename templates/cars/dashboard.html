@@ -6,16 +6,16 @@
     <div class="container my-5">
         <h2 class="mb-4">Dashboard</h2>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-4 mt-3">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Cars in Rent</h5>
                         <p class="card-text">{{ cars_in_rent }}</p>
-                        <a href="{% url 'cars:car_models' %}?status=rented" class="btn btn-primary">Show</a>
+                        <a href="{% url 'rent:rental_manager_list' %}" class="btn btn-primary">Show</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mt-3">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Cars in Service</h5>
@@ -24,16 +24,15 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mt-3">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Total Cars</h5>
                         <p class="card-text">{{ total_cars }}</p>
-                        <a href="{% url 'cars:car_models' %}" class="btn btn-primary">Show</a>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mt-3">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Total Car Models</h5>
@@ -42,7 +41,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mt-3">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Total Maintenance</h5>
@@ -50,7 +49,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mt-3">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Total Users</h5>
@@ -58,7 +57,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mt-3">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Total Maintenance Cost</h5>
@@ -66,7 +65,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mt-3">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Total Rental Income</h5>

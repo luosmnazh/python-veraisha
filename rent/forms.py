@@ -15,7 +15,7 @@ class RentalCreateForm(forms.ModelForm):
 
     def clean_start_date(self):
         start_date = self.cleaned_data['start_date']
-        if start_date < timezone.now():
+        if start_date < timezone.now() - timezone.timedelta(days=1):
             raise forms.ValidationError('The start date cannot be in the past')
         return start_date
 
@@ -33,7 +33,7 @@ class RentalCreateForm(forms.ModelForm):
             raise forms.ValidationError('The end date must be greater than the start date')
         return cleaned_data
 
-    def save(self, commit=True):
+    def save(self, commit=True) -> Rental:
         rental = super().save(commit=False)
         rental.total_price = rental.car.daily_price * (rental.end_date - rental.start_date).days
         if commit:

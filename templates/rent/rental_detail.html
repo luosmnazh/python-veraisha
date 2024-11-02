@@ -2,17 +2,28 @@
 
 {% block content %}
     {% include 'snippets/get_navbar.html' %}
-<div class="container mt-5">
-    <h2>Детали аренды</h2>
-    <p><strong>Автомобиль:</strong> {{ object.car }}</p>
-    <p><strong>Пользователь:</strong> {{ object.user }}</p>
-    <p><strong>Дата начала:</strong> {{ object.start_date }}</p>
-    <p><strong>Дата окончания:</strong> {{ object.end_date }}</p>
-    <p><strong>Статус:</strong> {{ object.status }}</p>
-    <p><strong>Цена:</strong> {{ object.total_price }}</p>
-    <p><strong>Заметки:</strong> {{ object.notes }}</p>
+    <div class="container mt-5 pt-5">
+        {% if request.user.is_manager %}
+            <a href="{% url 'rent:rental_manager_list' %}" class="btn btn-primary">Back to all rents</a>
+        {% else %}
+            <a href="{% url 'rent:rental_user_list' %}" class="btn btn-primary">Back to my rents</a>
+        {% endif %}
+    </div>
+    <div class="container mt-5">
+        <h2>Rental detail</h2>
+        <p><strong>Vehicle:</strong> {{ object.car }}</p>
+        <p><strong>User:</strong> {{ object.user }}</p>
+        <p><strong>Start date:</strong> {{ object.start_date|date:"d-m-Y" }}</p>
+        <p><strong>End date:</strong> {{ object.end_date|date:"d-m-Y" }}</p>
+        <p><strong>Status:</strong> {{ object.status }}</p>
+        <p><strong>Cost:</strong> {{ object.total_price }}</p>
+        {% if object.notes %}
+            <p><strong>Notes:</strong> {{ object.notes }}</p>
+        {% endif %}
 
-    <a href="{% url 'rent:rental_cancel' object.pk %}" class="btn btn-danger">Отменить аренду</a>
-    <a href="{% url 'rent:rental_finish' object.pk %}" class="btn btn-success">Завершить аренду</a>
-</div>
+        <a href="{% url 'rent:rental_cancel' object.pk %}" class="btn btn-danger">Cancel Rent</a>
+        {% if request.user.is_manager %}
+            <a href="{% url 'rent:rental_finish' object.pk %}" class="btn btn-success">Finish Rent</a>
+        {% endif %}
+    </div>
 {% endblock %}

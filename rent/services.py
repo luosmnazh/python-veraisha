@@ -7,12 +7,20 @@ from rent.models import Rental
 from users.models import User
 
 
-def rent_car(model_id: int, user: User, form: RentalCreateForm) -> RentalCreateForm:
+def rent_car(model_id: int, user: User, form: RentalCreateForm, request) -> Rental | None:
     """Rent a car"""
     car = get_random_car_by_model_id(model_id)
+    if not car:
+        messages.error(request, 'No cars available for this model. How did you get here?')
+        return
+
+    if user.rentals.filter(status='pending').exists():
+        messages.error(request, 'You already have a pending rental')
+        return
+
     form.instance.user = user
     form.instance.car = car
-    form.instance.status = 'active'
+    form.instance.status = 'pending'
     set_car_status(car, car.STATUS_TYPES[1][0])
 
     return form.save(commit=False)
@@ -20,24 +28,21 @@ def rent_car(model_id: int, user: User, form: RentalCreateForm) -> RentalCreateF
 
 def cancel_rent(rental: Rental, request) -> None:
     """Cancel a rental"""
-    if rental.status == 'In progress':
-        messages.error(request,
-                       'You cannot cancel a rental in progress. Please follow to closest facility to return the car.')
+    if rental.status != 'pending':
+        messages.error(request, 'You can only cancel pending rentals')
         return
-    if rental.status == 'Cancelled':
-        messages.error(request, 'This rental is already cancelled.')
-        return
-    rental.status = 'Cancelled'
+    rental.status = 'cancelled'
     rental.end_date = rental.start_date
     set_car_status(rental.car, 'available')
     rental.save()
 
 
-def finish_rent(rental: Rental) -> None:
+def finish_rent(rental: Rental, request) -> None:
     """Finish a rental"""
-    if rental.status == 'Cancelled':
-        raise ValueError('You cannot finish a cancelled rental. Maybe you want to cancel it?')
-    rental.status = 'Finished'
+    if rental.status == 'cancelled':
+        messages.error(request, 'You can only finish active rentals')
+        return
+    rental.status = 'finished'
     rental.save()
     set_car_status(rental.car, 'available')
     rental.car.save()

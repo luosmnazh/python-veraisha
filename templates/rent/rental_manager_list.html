@@ -3,16 +3,16 @@
 {% block content %}
     {% include 'snippets/get_navbar.html' %}
 <div class="container mt-5">
-    <h2>Все аренды</h2>
+    <h2>All rents</h2>
     <table class="table table-striped mt-3">
         <thead>
             <tr>
-                <th>Пользователь</th>
-                <th>Автомобиль</th>
-                <th>Дата начала</th>
-                <th>Дата окончания</th>
-                <th>Статус</th>
-                <th>Действия</th>
+                <th>User</th>
+                <th>Vehicle</th>
+                <th>Start date</th>
+                <th>End date</th>
+                <th>Status</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -24,10 +24,10 @@
                 <td>{{ rental.end_date }}</td>
                 <td>{{ rental.status }}</td>
                 <td>
-                    <a href="{% url 'rent:rental_detail' rental.pk %}" class="btn btn-primary btn-sm">Подробнее</a>
-                    {% if rental.status != 'Finished' and rental.status != 'Cancelled' %}
-                    <a href="{% url 'rent:rental_cancel' rental.pk %}" class="btn btn-danger btn-sm">Отменить</a>
-                    <a href="{% url 'rent:rental_finish' rental.pk %}" class="btn btn-success btn-sm">Завершить</a>
+                    <a href="{% url 'rent:rental_detail' rental.pk %}" class="btn btn-primary btn-sm">Details</a>
+                    {% if rental.status != 'finished' and rental.status != 'cancelled' %}
+                    <a href="{% url 'rent:rental_cancel' rental.pk %}" class="btn btn-danger btn-sm">Cancel</a>
+                    <a href="{% url 'rent:rental_finish' rental.pk %}" class="btn btn-success btn-sm">Finish</a>
                     {% endif %}
                 </td>
             </tr>

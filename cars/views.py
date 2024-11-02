@@ -8,6 +8,7 @@ from django.views.generic import CreateView, ListView, TemplateView, UpdateView
 
 from cars.forms import CarCreateForm, CarModelForm, VehicleMaintenanceForm
 from cars.models import Car, CarModel, VehicleMaintenance
+from rent.models import Rental
 from users.models import User
 
 
@@ -161,6 +162,6 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         context['total_car_models'] = CarModel.objects.count()
         context['total_maintenance'] = VehicleMaintenance.objects.count()
         context['total_users'] = User.objects.count()
-        context['total_maintenance_cost'] = VehicleMaintenance.objects.aggregate(total_cost=Sum('maintenance_cost'))['total_cost']
-        context['total_rental_income'] = Car.objects.filter(status='rented').aggregate(total_income=Sum('daily_price'))['total_income']
+        context['total_maintenance_cost'] = VehicleMaintenance.objects.aggregate(total_cost=Sum('maintenance_cost'))['total_cost'] or 0
+        context['total_rental_income'] = Rental.objects.filter(status='finished').aggregate(total_income=Sum('total_price'))['total_income'] or 0
         return context
