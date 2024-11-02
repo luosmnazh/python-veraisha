@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% include 'snippets/get_navbar.html' %}
+    <div class="container my-5 pt-3">
+        <h2 class="mb-3">{{ ticket.title }}</h2>
+        <p class="text-muted">Status: <span
+                class="badge {% if ticket.status == 'open' %}bg-success{% else %}bg-secondary{% endif %}">{{ ticket.get_status_display }}</span>
+        </p>
+        {% if user.is_manager %}
+            <a class="btn btn-primary"  href="{% url 'support:ticket_close' ticket.pk %}">Close Ticket
+            </a>
+        {% endif %}
+
+        <h3 class="mt-4">Messages</h3>
+        <ul class="list-group mb-3">
+            {% for message in messages %}
+                <li class="list-group-item">
+                    <strong>{{ message.user.username }}</strong>: {{ message.content }}
+                    <span class="text-muted float-end">{{ message.created_at }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+
+        {% if ticket.status == 'open' %}
+            <form method="post" class="mb-3">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="id_content" class="form-label">Content:</label>
+                    <textarea class="form-control" name="content" cols="40" rows="10"
+                              placeholder="Enter your message..."
+                              required="" id="id_content"></textarea>
+                </div>
+            <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+        {% else %}
+            <p class="text-danger">This ticket is closed and cannot receive new messages.</p>
+        {% endif %}
+    </div>
+
+
+{% endblock %}
