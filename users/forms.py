@@ -1,7 +1,7 @@
-from django.contrib.auth.forms import UserCreationForm
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 
-from users.models import User
+from users.models import User, DriverLicense, DriverLicenseCategory
 
 
 class UserRegistrationForm(UserCreationForm):
@@ -43,3 +43,16 @@ class UserLoginForm(forms.Form):
             raise forms.ValidationError('Email or password is incorrect')
 
         return self.cleaned_data
+
+
+class DriverLicenseForm(forms.ModelForm):
+    class Meta:
+        model = DriverLicense
+        fields = ['surname', 'name_patronymic', 'iin', 'date_of_issue', 'date_of_expiry', 'license_number', 'photo',
+                  'category']
+
+    def clean_iin(self):
+        iin = self.cleaned_data.get('iin')
+        if DriverLicense.objects.filter(iin=iin).exists():
+            raise forms.ValidationError('Driver license with this IIN already exists')
+        return iin

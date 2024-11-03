@@ -74,4 +74,3 @@ class CarModel(models.Model):
     def get_availability(self) -> int:
         """Get the number of available cars"""
         return self.cars.filter(status='available').count()
-

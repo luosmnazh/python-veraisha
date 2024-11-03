@@ -1,5 +1,8 @@
 from django.contrib import admin
+
 from support.models import Ticket, TicketMessage
+
+
 # Register your models here.
 
 
@@ -14,4 +17,3 @@ class TicketAdmin(admin.ModelAdmin):
 class TicketMessageAdmin(admin.ModelAdmin):
     list_display = ['ticket', 'user', 'created_at']
     search_fields = ['ticket__title', 'user__username']
-

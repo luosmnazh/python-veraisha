@@ -5,6 +5,7 @@ from django.shortcuts import redirect
 
 class UnauthenticatedOnlyMixin(UserPassesTestMixin):
     authenticated_next_page = 'cars:index'
+
     def test_func(self):
         return not self.request.user.is_authenticated
 

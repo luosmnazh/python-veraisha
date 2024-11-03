@@ -2,10 +2,10 @@
 
 {% block content %}
     {% include 'snippets/get_navbar.html' %}
-<div class="container mt-5">
-    <h2>All rents</h2>
-    <table class="table table-striped mt-3">
-        <thead>
+    <div class="container mt-5">
+        <h2>All rents</h2>
+        <table class="table table-striped mt-3">
+            <thead>
             <tr>
                 <th>User</th>
                 <th>Vehicle</th>
@@ -14,29 +14,29 @@
                 <th>Status</th>
                 <th>Actions</th>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             {% for rental in rentals %}
-            <tr>
-                <td>{{ rental.user }}</td>
-                <td>{{ rental.car }}</td>
-                <td>{{ rental.start_date }}</td>
-                <td>{{ rental.end_date }}</td>
-                <td>{{ rental.status }}</td>
-                <td>
-                    <a href="{% url 'rent:rental_detail' rental.pk %}" class="btn btn-primary btn-sm">Details</a>
-                    {% if rental.status != 'finished' and rental.status != 'cancelled' %}
-                    <a href="{% url 'rent:rental_cancel' rental.pk %}" class="btn btn-danger btn-sm">Cancel</a>
-                    <a href="{% url 'rent:rental_finish' rental.pk %}" class="btn btn-success btn-sm">Finish</a>
-                    {% endif %}
-                </td>
-            </tr>
+                <tr>
+                    <td>{{ rental.user }}</td>
+                    <td>{{ rental.car }}</td>
+                    <td>{{ rental.start_date }}</td>
+                    <td>{{ rental.end_date }}</td>
+                    <td>{{ rental.status }}</td>
+                    <td>
+                        <a href="{% url 'rent:rental_detail' rental.pk %}" class="btn btn-primary btn-sm">Details</a>
+                        {% if rental.status != 'finished' and rental.status != 'cancelled' %}
+                            <a href="{% url 'rent:rental_cancel' rental.pk %}" class="btn btn-danger btn-sm">Cancel</a>
+                            <a href="{% url 'rent:rental_finish' rental.pk %}" class="btn btn-success btn-sm">Finish</a>
+                        {% endif %}
+                    </td>
+                </tr>
             {% empty %}
-            <tr>
-                <td colspan="6">Нет аренд для отображения.</td>
-            </tr>
+                <tr>
+                    <td colspan="6">There are no active rents.</td>
+                </tr>
             {% endfor %}
-        </tbody>
-    </table>
-</div>
+            </tbody>
+        </table>
+    </div>
 {% endblock %}

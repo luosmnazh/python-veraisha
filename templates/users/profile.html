@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% include 'snippets/get_navbar.html' %}
+    <div class="container mt-5 pt-5">
+        <h2>Profile</h2>
+        <div class="row mt-3">
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Personal information</h5>
+                        {% if request.user.driver_license.license_number %}
+                            <p class="card-text">Driver
+                                license: {{ request.user.driver_license.surname }} {{ request.user.driver_license.name_patronymic }}</p>
+                        {% else %}
+                            <p class="card-text">Driver license: not provided</p>
+                        {% endif %}
+                        <a class="card-text btn btn-primary" href="{% url 'users:driver_license' %}">Edit
+                            driver license</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Rentals</h5>
+                        <a class="card-text btn btn-primary" href="{% url 'rent:rental_user_list' %}">My
+                            rentals</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

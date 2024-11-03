@@ -2,6 +2,9 @@
 
 {% block content %}
     {% include 'snippets/get_navbar.html' %}
+    <div class="container mt-5 pt-5">
+        <a href="{% url 'users:profile' %}" class="btn btn-primary">Back</a>
+    </div>
     <div class="container mt-5">
         <h2>My Rentals</h2>
         <table class="table table-striped mt-3">
@@ -30,11 +33,11 @@
                         <a href="{% url 'rent:rental_detail' rental.pk %}" class="btn btn-primary btn-sm">Details</a>
                         {% if rental.status == 'pending' %}
                             <a href="{% url 'rent:rental_cancel' rental.pk %}"
-                               class="btn btn-danger btn-sm">Отменить</a>
+                               class="btn btn-danger btn-sm">Cancel</a>
                         {% endif %}
                         {% if rental.status == 'active' %}
                             <a href="{% url 'rent:rental_finish' rental.pk %}"
-                               class="btn btn-success btn-sm">Завершить</a>
+                               class="btn btn-success btn-sm">Finish</a>
                         {% endif %}
                     </td>
                 </tr>

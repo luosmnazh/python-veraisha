@@ -3,10 +3,11 @@ from django.contrib.auth import logout, login
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.views import View
+from django.views.generic import CreateView, UpdateView
 
-from users.forms import UserLoginForm, UserRegistrationForm
+from users.forms import UserLoginForm, UserRegistrationForm, DriverLicenseForm
 from users.mixins import UnauthenticatedOnlyMixin
-from users.models import User
+from users.models import User, DriverLicense
 
 
 # Create your views here.
@@ -67,3 +68,19 @@ class RegisterView(UnauthenticatedOnlyMixin, View):
         user = form.save()
         login(request, user)
         return redirect(self.next_page)
+
+
+class UserProfileView(LoginRequiredMixin, View):
+    def get(self, request):
+        return render(request, 'users/profile.html')
+
+
+class UserDriverLicenseView(LoginRequiredMixin, UpdateView):
+    model = DriverLicense
+    form_class = DriverLicenseForm
+    template_name = 'users/driver_license.html'
+    success_url = 'users:profile'
+
+    def get_object(self, queryset=None):
+        obj, created = DriverLicense.objects.get_or_create(user=self.request.user)
+        return obj

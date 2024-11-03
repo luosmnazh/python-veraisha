@@ -5,7 +5,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -20,12 +19,19 @@ class Migration(migrations.Migration):
                 ('mark', models.CharField(max_length=50)),
                 ('model', models.CharField(max_length=50)),
                 ('year', models.IntegerField()),
-                ('body_type', models.CharField(choices=[('sedan', 'Sedan'), ('hatchback', 'Hatchback'), ('suv', 'SUV'), ('coupe', 'Coupe'), ('convertible', 'Convertible'), ('crossover', 'Crossover')], max_length=50)),
-                ('fuel_type', models.CharField(choices=[('gasoline', 'Gasoline'), ('diesel', 'Diesel'), ('electric', 'Electric'), ('hybrid', 'Hybrid')], max_length=50)),
-                ('transmission', models.CharField(choices=[('manual', 'Manual'), ('automatic', 'Automatic')], max_length=50)),
+                ('body_type', models.CharField(
+                    choices=[('sedan', 'Sedan'), ('hatchback', 'Hatchback'), ('suv', 'SUV'), ('coupe', 'Coupe'),
+                             ('convertible', 'Convertible'), ('crossover', 'Crossover')], max_length=50)),
+                ('fuel_type', models.CharField(
+                    choices=[('gasoline', 'Gasoline'), ('diesel', 'Diesel'), ('electric', 'Electric'),
+                             ('hybrid', 'Hybrid')], max_length=50)),
+                ('transmission',
+                 models.CharField(choices=[('manual', 'Manual'), ('automatic', 'Automatic')], max_length=50)),
                 ('daily_price', models.DecimalField(decimal_places=2, max_digits=6)),
                 ('mileage', models.IntegerField(default=0)),
-                ('status', models.CharField(choices=[('available', 'Available'), ('rented', 'Rented'), ('maintenance', 'Maintenance')], default='available', max_length=50)),
+                ('status', models.CharField(
+                    choices=[('available', 'Available'), ('rented', 'Rented'), ('maintenance', 'Maintenance')],
+                    default='available', max_length=50)),
                 ('location', models.CharField(default='0.0,0.0', max_length=50)),
                 ('display_name', models.CharField(default='', max_length=50)),
                 ('display_description', models.TextField(default='')),

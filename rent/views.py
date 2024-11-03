@@ -1,12 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import View
-from django.views.generic import ListView, CreateView, UpdateView, DetailView
+from django.views.generic import ListView, CreateView, DetailView
 
-from cars.services import get_random_car_by_model_id
 from rent.forms import RentalCreateForm
 from rent.models import Rental
 from rent.services import rent_car, cancel_rent, finish_rent
@@ -88,7 +87,3 @@ class RentalDetailView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         context['rental'] = get_object_or_404(Rental, pk=self.kwargs.get('pk'))
         return context
-
-
-
-

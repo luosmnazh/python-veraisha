@@ -162,6 +162,8 @@ class DashboardView(LoginRequiredMixin, TemplateView):
         context['total_car_models'] = CarModel.objects.count()
         context['total_maintenance'] = VehicleMaintenance.objects.count()
         context['total_users'] = User.objects.count()
-        context['total_maintenance_cost'] = VehicleMaintenance.objects.aggregate(total_cost=Sum('maintenance_cost'))['total_cost'] or 0
-        context['total_rental_income'] = Rental.objects.filter(status='finished').aggregate(total_income=Sum('total_price'))['total_income'] or 0
+        context['total_maintenance_cost'] = VehicleMaintenance.objects.aggregate(total_cost=Sum('maintenance_cost'))[
+                                                'total_cost'] or 0
+        context['total_rental_income'] = \
+        Rental.objects.filter(status='finished').aggregate(total_income=Sum('total_price'))['total_income'] or 0
         return context

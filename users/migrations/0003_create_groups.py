@@ -28,7 +28,6 @@ def delete_groups(apps, schema_editor):
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('users', '0002_driverlicensecategory_user_is_driver_driverlicense'),
     ]

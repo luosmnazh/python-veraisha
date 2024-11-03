@@ -1,5 +1,4 @@
 from django.contrib import messages
-from django.contrib.auth.decorators import permission_required
 
 from cars.services import get_random_car_by_model_id, set_car_status
 from rent.forms import RentalCreateForm

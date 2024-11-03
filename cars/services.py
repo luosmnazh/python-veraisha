@@ -1,4 +1,4 @@
-from cars.models import Car, CarModel
+from cars.models import Car
 
 
 def get_random_car_by_model_id(model_id: int) -> Car | None:

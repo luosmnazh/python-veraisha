@@ -1,9 +1,10 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import CreateView, ListView, DetailView
-from django.contrib import messages
+
 from .forms import TicketCreateForm, TicketMessageForm
 from .models import Ticket
 
@@ -38,7 +39,7 @@ class TicketDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['messages'] = self.object.messages.all().order_by('created_at')
+        context['msgs'] = self.object.messages.all().order_by('created_at')
         context['form'] = TicketMessageForm()
         return context
 

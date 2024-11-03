@@ -29,7 +29,8 @@
                             <p class="card-text"
                                style="height: 60px; overflow: hidden;">{{ car_model.description|truncatewords:15 }}</p>
                             <ul class="list-group list-group-flush">
-                                <li class="list-group-item"><strong>Transmission:</strong> {{ car_model.transmission|capfirst }}</li>
+                                <li class="list-group-item">
+                                    <strong>Transmission:</strong> {{ car_model.transmission|capfirst }}</li>
                                 <li class="list-group-item"><strong>Price Per
                                     Day:</strong> {{ car_model.get_min_max_price_per_model|format_price_range }}</li>
                                 <li class="list-group-item"><strong>Year:</strong> {{ car_model.year }}</li>

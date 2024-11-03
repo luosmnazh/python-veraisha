@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% include 'snippets/get_navbar.html' %}
+    <div class="container mt-5 pt-5">
+        <a href="{% url 'users:profile' %}" class="btn btn-primary">Back</a>
+    </div>
+    <div class="container mt-5">
+        <h2>Driver License</h2>
+        <form method="post" enctype="multipart/form-data" class="needs-validation" novalidate>
+            {% csrf_token %}
+
+            <div class="mb-3">
+                <label for="id_surname" class="form-label">Surname:</label>
+                <input type="text" name="surname" maxlength="50" required class="form-control" id="id_surname">
+            </div>
+
+            <div class="mb-3">
+                <label for="id_name_patronymic" class="form-label">Name and patronymic:</label>
+                <input type="text" name="name_patronymic" maxlength="100" required class="form-control"
+                       id="id_name_patronymic">
+            </div>
+
+            <div class="mb-3">
+                <label for="id_iin" class="form-label">IIN:</label>
+                <input type="text" name="iin" maxlength="12" required class="form-control" id="id_iin">
+            </div>
+
+            <div class="mb-3">
+                <label for="id_date_of_issue" class="form-label">Date of issue:</label>
+                <input type="date" name="date_of_issue" required class="form-control" id="id_date_of_issue">
+            </div>
+
+            <div class="mb-3">
+                <label for="id_date_of_expiry" class="form-label">Date of expire:</label>
+                <input type="date" name="date_of_expiry" required class="form-control" id="id_date_of_expiry">
+            </div>
+
+            <div class="mb-3">
+                <label for="id_license_number" class="form-label">License number:</label>
+                <input type="text" name="license_number" maxlength="10" required class="form-control"
+                       id="id_license_number">
+            </div>
+
+            <div class="mb-3">
+                <label for="id_photo" class="form-label">Photo:</label>
+                <input type="file" name="photo" accept="image/*" class="form-control" id="id_photo">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Categories:</label>
+                {% for category in form.category.field.queryset %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="category" value="{{ category.id }}"
+                               id="category_{{ category.id }}">
+                        <label class="form-check-label" for="category_{{ category.id }}">{{ category.name }}</label>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <button type="submit" class="btn btn-primary">Сохранить</button>
+        </form>
+
+    </div>
+{% endblock %}

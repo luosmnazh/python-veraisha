@@ -6,41 +6,45 @@
 {% endblock %}
 
 {% block content %}
-<div class="d-flex align-items-center justify-content-center vh-100">
-    <div class="container-wrapper container border shadow-lg rounded-5 d-flex p-0">
-        <div class="col-md-3 gradient-bg d-flex align-items-center justify-content-center rounded-start-5">
-            <h2 class="text-center">Welcome Back!</h2>
-        </div>
-
-        <div class="col-md-3 offset-md-3 p-4 d-flex flex-column justify-content-center">
-
-            <div id="login-form" class="border-bottom">
-                <h3 class="text-center mb-4">Registration</h3>
-                <form method="post">
-                    {% csrf_token %}
-                    {{ form }}
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email address</label>
-                        <input name="email" type="email" class="form-control" id="email" placeholder="Enter your email">
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input name="password1" type="password" class="form-control" id="password" placeholder="Enter your password">
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Repeat password</label>
-                        <input name="password2" type="password" class="form-control" id="password" placeholder="Enter your password">
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100 mb-3">Log In</button>
-                </form>
+    <div class="d-flex align-items-center justify-content-center vh-100">
+        <div class="container-wrapper container border shadow-lg rounded-5 d-flex p-0">
+            <div class="col-md-3 gradient-bg d-flex align-items-center justify-content-center rounded-start-5">
+                <h2 class="text-center">Welcome Back!</h2>
             </div>
 
-            <div id="options" class="text-center mt-5">
-                <a href="{% url 'users:login' %}" class="btn btn-link text-decoration-none">Already have an account? Log In</a><br>
-                <a href="#" class="btn btn-link text-decoration-none">Forgot password?</a><br>
-                <a href="#" class="btn btn-link text-decoration-none">Help desk</a>
+            <div class="col-md-3 offset-md-3 p-4 d-flex flex-column justify-content-center">
+
+                <div id="login-form" class="border-bottom">
+                    <h3 class="text-center mb-4">Registration</h3>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ form }}
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email address</label>
+                            <input name="email" type="email" class="form-control" id="email"
+                                   placeholder="Enter your email">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input name="password1" type="password" class="form-control" id="password"
+                                   placeholder="Enter your password">
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Repeat password</label>
+                            <input name="password2" type="password" class="form-control" id="password"
+                                   placeholder="Enter your password">
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 mb-3">Log In</button>
+                    </form>
+                </div>
+
+                <div id="options" class="text-center mt-5">
+                    <a href="{% url 'users:login' %}" class="btn btn-link text-decoration-none">Already have an account?
+                        Log In</a><br>
+                    <a href="#" class="btn btn-link text-decoration-none">Forgot password?</a><br>
+                    <a href="#" class="btn btn-link text-decoration-none">Help desk</a>
+                </div>
             </div>
         </div>
     </div>
-</div>
 {% endblock %}

@@ -14,25 +14,29 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-            {% if user.is_authenticated %}
-                <li class="nav-item"><a class="nav-link" href="{% url 'cars:car_models' %}">Cars</a></li>
-                <li class="nav-item"><a class="nav-link" href="#rates">Rates</a></li>
-                <li class="nav-item me-2"><a class="nav-link" href="{% url 'support:user_ticket_list' %}">Help Desk</a></li>
-            {% else %}
-                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                <li class="nav-item"><a class="nav-link" href="#locations">Locations</a></li>
-                <li class="nav-item"><a class="nav-link" href="#rates">Rates</a></li>
-                <li class="nav-item me-2"><a class="nav-link" href="{% url 'support:user_ticket_list' %}">Help Desk</a></li>
-            {% endif %}
+                {% if user.is_authenticated %}
+                    <li class="nav-item"><a class="nav-link" href="{% url 'cars:car_models' %}">Cars</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#rates">Rates</a></li>
+                    <li class="nav-item me-2"><a class="nav-link" href="{% url 'support:user_ticket_list' %}">Help
+                        Desk</a></li>
+                {% else %}
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#locations">Locations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#rates">Rates</a></li>
+                    <li class="nav-item me-2"><a class="nav-link" href="{% url 'support:user_ticket_list' %}">Help
+                        Desk</a></li>
+                {% endif %}
                 {% if user.is_authenticated %}
                     <li class="nav-item ms-3"><a class="nav-link btn btn-outline-primary me-2"
-                                                 href="{% url 'rent:rental_user_list' %}">Profile</a></li>
+                                                 href="{% url 'users:profile' %}">Profile</a></li>
                     <li class="nav-item"><a class="nav-link btn btn-primary" href="{% url 'users:logout' %}">Logout</a>
                     </li>
                 {% else %}
-                    <li class="nav-item ms-3"><a class="nav-link btn btn-outline-primary me-2" href="{% url 'users:register' %}">Join Now</a>
+                    <li class="nav-item ms-3"><a class="nav-link btn btn-outline-primary me-2"
+                                                 href="{% url 'users:register' %}">Join Now</a>
                     </li>
-                    <li class="nav-item"><a class="nav-link btn btn-primary" href="{% url 'users:login' %}">Login</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-primary" href="{% url 'users:login' %}">Login</a>
+                    </li>
                 {% endif %}
             </ul>
         </div>

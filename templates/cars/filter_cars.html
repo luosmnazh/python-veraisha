@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-{% for car in cars %}
-    {{ car.id }} | {{   car.name }} | {{  car }} <br>
-{% endfor %}
+    {% for car in cars %}
+        {{ car.id }} | {{ car.name }} | {{ car }} <br>
+    {% endfor %}
 {% endblock %}

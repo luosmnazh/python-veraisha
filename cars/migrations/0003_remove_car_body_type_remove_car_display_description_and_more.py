@@ -4,7 +4,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('cars', '0002_carmodel_remove_car_mark_alter_car_model'),
     ]
@@ -46,17 +45,21 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='carmodel',
             name='body_type',
-            field=models.CharField(choices=[('sedan', 'Sedan'), ('hatchback', 'Hatchback'), ('suv', 'SUV'), ('coupe', 'Coupe'), ('convertible', 'Convertible'), ('crossover', 'Crossover')], default='sedan', max_length=50),
+            field=models.CharField(
+                choices=[('sedan', 'Sedan'), ('hatchback', 'Hatchback'), ('suv', 'SUV'), ('coupe', 'Coupe'),
+                         ('convertible', 'Convertible'), ('crossover', 'Crossover')], default='sedan', max_length=50),
         ),
         migrations.AddField(
             model_name='carmodel',
             name='fuel_type',
-            field=models.CharField(choices=[('gasoline', 'Gasoline'), ('diesel', 'Diesel'), ('electric', 'Electric'), ('hybrid', 'Hybrid')], default='gasoline', max_length=50),
+            field=models.CharField(choices=[('gasoline', 'Gasoline'), ('diesel', 'Diesel'), ('electric', 'Electric'),
+                                            ('hybrid', 'Hybrid')], default='gasoline', max_length=50),
         ),
         migrations.AddField(
             model_name='carmodel',
             name='transmission',
-            field=models.CharField(choices=[('manual', 'Manual'), ('automatic', 'Automatic')], default='manual', max_length=50),
+            field=models.CharField(choices=[('manual', 'Manual'), ('automatic', 'Automatic')], default='manual',
+                                   max_length=50),
         ),
         migrations.AddField(
             model_name='carmodel',

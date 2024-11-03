@@ -28,13 +28,13 @@ class User(AbstractUser):
 class DriverLicense(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='driver_license', primary_key=True)
 
-    surname = models.CharField(max_length=50)
-    name_patronymic = models.CharField(max_length=100)
-    iin = models.CharField(max_length=12, unique=True, db_index=True)
-    date_of_issue = models.DateField()
-    date_of_expiry = models.DateField()
-    license_number = models.CharField(max_length=10, unique=True, db_index=True)
-    photo = models.ImageField(upload_to='driver_license_photos', null=True, blank=True)
+    surname = models.CharField(max_length=50, default='')
+    name_patronymic = models.CharField(max_length=100, default='')
+    iin = models.CharField(max_length=12, db_index=True, default='')
+    date_of_issue = models.DateField(default='1900-01-01')
+    date_of_expiry = models.DateField(default='1900-01-01')
+    license_number = models.CharField(max_length=10, db_index=True, default='')
+    photo = models.ImageField(upload_to='driver_license_photos', null=True, blank=True, default='')
     category = models.ManyToManyField('DriverLicenseCategory')
 
     def __str__(self):
